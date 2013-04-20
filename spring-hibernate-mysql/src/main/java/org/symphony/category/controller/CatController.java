@@ -1,12 +1,12 @@
-package org.krams.tutorial.controller;
+package org.symphony.category.controller;
 
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
-import org.krams.tutorial.domain.Person;
-import org.krams.tutorial.service.PersonService;
+import org.symphony.category.domain.Category;
+import org.symphony.category.service.CategoryService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,35 +16,35 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 /**
- * Handles and retrieves person request
+ * Handles and retrieves Category request
  */
 @Controller
-@RequestMapping("/main")
-public class MainController {
+@RequestMapping("/catView")
+public class CatController {
 
 	protected static Logger logger = Logger.getLogger("controller");
 	
-	@Resource(name="personService")
-	private PersonService personService;
+	@Resource(name="categoryService")
+	private CategoryService catService;
 	
 	/**
-	 * Handles and retrieves all persons and show it in a JSP page
+	 * Handles and retrieves all Categorys and show it in a JSP page
 	 * 
 	 * @return the name of the JSP page
 	 */
-    @RequestMapping(value = "/persons", method = RequestMethod.GET)
-    public String getPersons(Model model) {
+    @RequestMapping(value = "/cats", method = RequestMethod.GET)
+    public String getCategory(Model model) {
     	
-    	logger.debug("Received request to show all persons");
+    	logger.debug("Received request to show all Categorys");
     	
-    	// Retrieve all persons by delegating the call to PersonService
-    	List<Person> persons = personService.getAll();
+    	// Retrieve all Categorys by delegating the call to CategoryServices
+    	List<Category> cat = catService.getAll();
     	
-    	// Attach persons to the Model
-    	model.addAttribute("persons", persons);
+    	// Attach Categorys to the Model
+    	model.addAttribute("cats", cat);
     	
-    	// This will resolve to /WEB-INF/jsp/personspage.jsp
-    	return "personspage";
+    	// This will resolve to /WEB-INF/jsp/ategoriespage.jsp
+    	return "categorypage";
 	}
     
     /**
@@ -52,36 +52,36 @@ public class MainController {
      * 
      * @return the name of the JSP page
      */
-    @RequestMapping(value = "/persons/add", method = RequestMethod.GET)
+    @RequestMapping(value = "/cats/add", method = RequestMethod.GET)
     public String getAdd(Model model) {
     	logger.debug("Received request to show add page");
     
     	// Create new Person and add to model
     	// This is the formBackingOBject
-    	model.addAttribute("personAttribute", new Person());
+    	model.addAttribute("categoryAttribute", new Category());
 
     	// This will resolve to /WEB-INF/jsp/addpage.jsp
-    	return "addpage";
+    	return "cataddpage";
 	}
  
     /**
-     * Adds a new person by delegating the processing to PersonService.
+     * Adds a new Category by delegating the processing to CategoryService.
      * Displays a confirmation JSP page
      * 
      * @return  the name of the JSP page
      */
-    @RequestMapping(value = "/persons/add", method = RequestMethod.POST)
-    public String add(@ModelAttribute("personAttribute") Person person) {
-		logger.debug("Received request to add new person");
+    @RequestMapping(value = "/cats/add", method = RequestMethod.POST)
+    public String add(@ModelAttribute("categoryAttribute") Category category) {
+		logger.debug("Received request to add new Category");
 		
     	// The "personAttribute" model has been passed to the controller from the JSP
     	// We use the name "personAttribute" because the JSP uses that name
 		
 		// Call PersonService to do the actual adding
-		personService.add(person);
+		catService.add(category);
 
     	// This will resolve to /WEB-INF/jsp/addedpage.jsp
-		return "addedpage";
+		return "cataddedpage";
 	}
     
     /**
@@ -97,7 +97,7 @@ public class MainController {
 		logger.debug("Received request to delete existing person");
 		
 		// Call PersonService to do the actual deleting
-		personService.delete(id);
+		catService.delete(id);
 		
 		// Add id reference to Model
 		model.addAttribute("id", id);
@@ -118,7 +118,7 @@ public class MainController {
     
     	// Retrieve existing Person and add to model
     	// This is the formBackingOBject
-    	model.addAttribute("personAttribute", personService.get(id));
+    	model.addAttribute("personAttribute", catService.get(id));
     	
     	// This will resolve to /WEB-INF/jsp/editpage.jsp
     	return "editpage";
@@ -131,20 +131,20 @@ public class MainController {
      * @return  the name of the JSP page
      */
     @RequestMapping(value = "/persons/edit", method = RequestMethod.POST)
-    public String saveEdit(@ModelAttribute("personAttribute") Person person, 
+    public String saveEdit(@ModelAttribute("personAttribute") Category category, 
     										   @RequestParam(value="id", required=true) Integer id, 
     												Model model) {
     	logger.debug("Received request to update person");
     
     	// The "personAttribute" model has been passed to the controller from the JSP
-    	// We use the name "personAttribute" because the JSP uses that name
+    	// We use the name "CategoryAttribute" because the JSP uses that name
     	
     	// We manually assign the id because we disabled it in the JSP page
     	// When a field is disabled it will not be included in the ModelAttribute
-    	person.setId(id);
+    	category.setCatId(id);
     	
-    	// Delegate to PersonService for editing
-    	personService.edit(person);
+    	// Delegate to CategoryService for editing
+    	catService.edit(category);
     	
     	// Add id reference to Model
 		model.addAttribute("id", id);

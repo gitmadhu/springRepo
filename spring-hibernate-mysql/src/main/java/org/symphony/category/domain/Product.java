@@ -1,4 +1,4 @@
-package org.krams.tutorial.domain;
+package org.symphony.category.domain;
 
 import java.io.Serializable;
 

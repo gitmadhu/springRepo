@@ -1,4 +1,4 @@
-package org.krams.tutorial.service;
+package org.symphony.category.service;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.krams.tutorial.domain.Category;
+import org.symphony.category.domain.Person;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,9 +16,9 @@ import org.springframework.transaction.annotation.Transactional;
  * Service for processing Persons
  * 
  */
-@Service("categoryService")
+@Service("personService")
 @Transactional
-public class CategoryService {
+public class PersonService {
 
 	protected static Logger logger = Logger.getLogger("service");
 	
@@ -30,14 +30,14 @@ public class CategoryService {
 	 * 
 	 * @return a list of persons
 	 */
-	public List<Category> getAll() {
-		logger.debug("Retrieving all Category");
+	public List<Person> getAll() {
+		logger.debug("Retrieving all persons");
 		
 		// Retrieve session from Hibernate
 		Session session = sessionFactory.getCurrentSession();
 		
 		// Create a Hibernate query (HQL)
-		Query query = session.createQuery("FROM  Category");
+		Query query = session.createQuery("FROM  Person");
 		
 		// Retrieve all
 		return  query.list();
@@ -46,26 +46,26 @@ public class CategoryService {
 	/**
 	 * Retrieves a single person
 	 */
-	public Category get( Integer id ) {
+	public Person get( Integer id ) {
 		// Retrieve session from Hibernate
 		Session session = sessionFactory.getCurrentSession();
 		
 		// Retrieve existing person first
-		Category category = (Category) session.get(Category.class, id);
+		Person person = (Person) session.get(Person.class, id);
 		
-		return category;
+		return person;
 	}
 	/**
 	 * Adds a new person
 	 */
-	public void add(Category category) {
-		logger.debug("Adding new Category");
+	public void add(Person person) {
+		logger.debug("Adding new person");
 		
 		// Retrieve session from Hibernate
 		Session session = sessionFactory.getCurrentSession();
 		
 		// Save
-		session.save(category);
+		session.save(person);
 	}
 	
 	/**
@@ -79,29 +79,30 @@ public class CategoryService {
 		Session session = sessionFactory.getCurrentSession();
 		
 		// Retrieve existing person first
-		Category category = (Category) session.get(Category.class, id);
+		Person person = (Person) session.get(Person.class, id);
 		
 		// Delete 
-		session.delete(category);
+		session.delete(person);
 	}
 	
 	/**
-	 * Edits an existing Category
+	 * Edits an existing person
 	 */
-	public void edit(Category category) {
-		logger.debug("Editing existing Category");
+	public void edit(Person person) {
+		logger.debug("Editing existing person");
 		
 		// Retrieve session from Hibernate
 		Session session = sessionFactory.getCurrentSession();
 		
-		// Retrieve existing Category via id
-		Category existingCategory = (Category) session.get(Category.class, category.getCatId());
+		// Retrieve existing person via id
+		Person existingPerson = (Person) session.get(Person.class, person.getId());
 		
-		// Assign updated values to this category
-		existingCategory.setCatName(category.getCatName());
-		existingCategory.setCatDesc(category.getCatDesc());
+		// Assign updated values to this person
+		existingPerson.setFirstName(person.getFirstName());
+		existingPerson.setLastName(person.getLastName());
+		existingPerson.setMoney(person.getMoney());
 
 		// Save updates
-		session.save(existingCategory);
+		session.save(existingPerson);
 	}
 }
