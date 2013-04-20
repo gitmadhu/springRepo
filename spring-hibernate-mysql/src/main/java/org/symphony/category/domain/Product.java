@@ -8,9 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import org.apache.commons.collections.functors.FalsePredicate;
 
 /**
  * For a complete reference see 
@@ -33,7 +31,6 @@ public class Product implements Serializable {
 	
 	@Column(name = "PROD_PRICE")
 	private String prodPrice;
-	@Column(name="CAT_ID")
 	
 	@ManyToOne
 	@JoinColumn(name="CAT_ID", nullable=false)

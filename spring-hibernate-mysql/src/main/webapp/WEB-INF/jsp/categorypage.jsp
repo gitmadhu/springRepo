@@ -24,9 +24,10 @@
 	<c:forEach items="${cats}" var="cat">
 			<c:url var="editUrl" value="/symph/catView/cats/edit?id=${cat.catId}" />
 			<c:url var="deleteUrl" value="/symph/catView/cats/delete?id=${cat.catId}" />
+			<c:url var="showProductsURL" value="/symph/productView/showProducts?id=${cat.catId}" />
 		<tr>
 			<td><c:out value="${cat.catId}" /></td>
-			<td><c:out value="${cat.catName}" /></td>
+			<td><a href="${showProductsURL}"><c:out value="${cat.catName}" /></a></td>
 			<td><c:out value="${cat.catDesc}" /></td>
 			<%-- <td><a href="${editUrl}">Edit</a></td>
 			<td><a href="${deleteUrl}">Delete</a></td>
@@ -37,8 +38,8 @@
 </table>
 
 <c:if test="${empty cats}">
-	There are currently no Categories in the list. <a href="${addUrl}">Add</a> a Category.
+	There are currently no Categories in the list.
 </c:if>
-
+ <a href="${addUrl}">Add</a> a Category.
 </body>
 </html>

@@ -16,12 +16,12 @@
 <form:form modelAttribute="categoryAttribute" method="POST" action="${saveUrl}">
 	<table>
 		<tr>
-			<td><form:label path="CategoryName">Category Name:</form:label></td>
+			<td><form:label path="catName">Category Name:</form:label></td>
 			<td><form:input path="CatName"/></td>
 		</tr>
 
 		<tr>
-			<td><form:label path="CategoryDesc">Category desc</form:label></td>
+			<td><form:label path="catDesc">Category desc</form:label></td>
 			<td><form:input path="catDesc"/></td>
 		</tr>
 		

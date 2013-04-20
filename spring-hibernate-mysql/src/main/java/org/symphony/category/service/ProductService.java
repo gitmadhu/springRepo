@@ -1,13 +1,18 @@
 package org.symphony.category.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.transform.ResultTransformer;
 import org.symphony.category.domain.Product;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
  * Service for processing Products
  * 
  */
-@Service("procuctService")
+@Service("productService")
 @Transactional
 public class ProductService {
 
@@ -103,4 +108,40 @@ public class ProductService {
 		// Save updates
 		session.save(existingProduct);
 	}
+
+	public List<Product> getProductsByCategory(Integer id) {
+		// Retrieve session from Hibernate
+		System.out.println("hi...");
+		Session session = sessionFactory.getCurrentSession();
+		List<Product> productList = new ArrayList<Product>();
+		/* Query qry= session.createQuery("select p.prodId ,p.prodName, c.catName from Product p left join p.category c where p.category.catId ="+id);
+		 List<Product> list =  qry.list();
+		 
+		 for(Product p:list){
+			 //productList.add((Product)p);
+			 System.out.println(p.getProdName());
+		 }*/
+		
+		Criteria crt = session.createCriteria(Product.class);
+		crt.setFetchMode("Category", FetchMode.JOIN).add(Restrictions.eq("category.catId", id.intValue()));
+		productList = crt.list();
+		return productList;
+	}
+		 
+/*	class ProductTransformer implements ResultTransformer {
+
+		public Object transformTuple(Object[] tuples, String[] aliases) {
+			Product p = new Product();
+		}
+		            String prodId = (String) tuples[0];
+		            String ProdName = (String)tuples[1];
+		            String catName = tuples[2];
+		              construct ProjectAssignment instance using appropriate args
+		    return new Product (aid, pid, (String) userName);
+		}
+
+		public List transformList(List collection) {
+			// TODO Auto-generated method stub
+			return null;
+		}*/
 }
