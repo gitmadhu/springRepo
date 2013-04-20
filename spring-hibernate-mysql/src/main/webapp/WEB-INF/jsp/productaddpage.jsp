@@ -10,25 +10,25 @@
 </head>
 <body>
 
-<h1>Create New Person</h1>
+<h1>Create New Product</h1>
 
-<c:url var="saveUrl" value="/krams/main/persons/add" />
-<form:form modelAttribute="personAttribute" method="POST" action="${saveUrl}">
+<c:url var="saveUrl" value="/symph/productView/products/add" />
+<form:form modelAttribute="productAttribute" method="POST" action="${saveUrl}">
 	<table>
 		<tr>
-			<td><form:label path="firstName">First Name:</form:label></td>
-			<td><form:input path="firstName"/></td>
+			<td><form:label path="prodName">Product Name:</form:label></td>
+			<td><form:input path="prodName"/></td>
 		</tr>
 
 		<tr>
-			<td><form:label path="lastName">Last Name</form:label></td>
-			<td><form:input path="lastName"/></td>
+			<td><form:label path="prodPrice">Price</form:label></td>
+			<td><form:input path="prodPrice"/></td>
 		</tr>
 		
 		<tr>
-			<td><form:label path="money">Money</form:label></td>
-			<td><form:input path="money"/></td>
-		</tr>
+			<td><form:label path="category.catId">category Id</form:label></td>
+			<td><form:input path="category.catId"/></td>
+		</tr> 
 	</table>
 	
 	<input type="submit" value="Save" />
