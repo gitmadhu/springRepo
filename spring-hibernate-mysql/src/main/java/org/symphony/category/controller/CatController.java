@@ -43,7 +43,7 @@ public class CatController {
     	// Attach Categorys to the Model
     	model.addAttribute("cats", cat);
     	
-    	// This will resolve to /WEB-INF/jsp/ategoriespage.jsp
+    	// This will resolve to /WEB-INF/jsp/categorypage.jsp
     	return "categorypage";
 	}
     

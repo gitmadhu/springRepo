@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<h1>Create New Person</h1>
+<h1>Create New Category</h1>
 
 <c:url var="saveUrl" value="/symph/catView/cats/add" />
 <form:form modelAttribute="categoryAttribute" method="POST" action="${saveUrl}">
