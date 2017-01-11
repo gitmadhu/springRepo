@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<context:annotation-config />
+	
+		
+	<!-- autowire by construction -->
+	<bean class="com.ibs.training.TriangleDrawing" id="triagleDrawing"
+		autowire="constructor">
+	</bean>
+
+	<!-- autowire byName -->
+	<bean class="com.ibs.training.CircleDrawing" id="circleDrawing"
+		autowire="byName">
+	</bean>
+
+	<!-- autowire byType -->
+	<bean class="com.ibs.training.RectangleDrawing" id="rectangleDrawing"
+		autowire="byType">
+	</bean>
+	
+	<!-- autowire byType -->
+	<bean class="com.ibs.training.SquareDrawing" id="squareDrawing">
+	</bean>
+	
+	
+
+	<bean id="triangle" class="com.ibs.training.Triangle">
+	</bean>
+	<bean id="circle" class="com.ibs.training.Circle">
+	</bean>
+
+	<bean id="rectangle" class="com.ibs.training.Rectangle">
+	</bean>
+
+	<bean name="square" class="com.ibs.training.Square">
+	</bean>
+</beans>

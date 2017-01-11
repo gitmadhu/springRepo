@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean class="com.ibs.training.collections.di.ShapesCollection" id="shapesCollection">
+		<!-- java.util.List -->
+		<property name="lists">
+			<list>
+				<bean class="com.ibs.training.shapes.Circle" />
+				<bean class="com.ibs.training.shapes.Triangle" />
+			</list>
+		</property>
+
+		<!-- java.util.Set -->
+		<property name="sets">
+			<set>
+				<bean class="com.ibs.training.shapes.Circle" />
+				<bean class="com.ibs.training.shapes.Triangle" />
+			</set>
+		</property>
+
+		<!-- java.util.Map -->
+		<property name="maps">
+			<map>
+				<entry key="Key 2" >
+					<bean class="com.ibs.training.shapes.Triangle" />
+				</entry>
+				<entry key="Key 3">
+					<bean class="com.ibs.training.shapes.Circle" />
+				</entry>
+			</map>
+		</property>
+
+		<!-- java.util.Properties -->
+		<property name="pros">
+			<props>
+				<prop key="admin">admin@ibs.com</prop>
+				<prop key="support">support@ibs.com</prop>
+			</props>
+		</property>
+
+	</bean>
+
+	<bean class="com.ibs.training.shapes.Triangle" id="triagle" />
+	<bean class="com.ibs.training.shapes.Circle" id="circle"  />
+	
+
+</beans>

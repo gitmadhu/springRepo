@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean class="com.ibs.training.service.ProfessionalDrawing" id="profDrawing">
+		<constructor-arg ref="triangle" />
+	</bean>
+	<!--  bean with no scope specified , default is session -->
+	<bean id="triangle" class="com.ibs.training.model.Triangle"  >
+	</bean>
+	<bean id="circle" class="com.ibs.training.model.Circle" scope="prototype" >
+	</bean>
+	
+		<bean class="com.ibs.training.service.ShapesCollection" id="shapesCollection">
+		<!-- java.util.List -->
+		<property name="lists">
+			<list>
+				<bean class="com.ibs.training.model.Circle" />
+				<bean class="com.ibs.training.model.Triangle" />
+			</list>
+		</property>
+
+		<!-- java.util.Set -->
+		<property name="sets">
+			<set>
+				<bean class="com.ibs.training.model.Circle" />
+				<bean class="com.ibs.training.model.Triangle" />
+			</set>
+		</property>
+
+		<!-- java.util.Map -->
+		<property name="maps">
+			<map>
+				<entry key="Key 2" >
+					<bean class="com.ibs.training.model.Triangle" />
+				</entry>
+				<entry key="Key 3">
+					<bean class="com.ibs.training.model.Circle" />
+				</entry>
+			</map>
+		</property>
+
+		<!-- java.util.Properties -->
+		<property name="pros">
+			<props>
+				<prop key="admin">admin@ibs.com</prop>
+				<prop key="support">support@ibs.com</prop>
+			</props>
+		</property>
+	</bean>
+</beans>
